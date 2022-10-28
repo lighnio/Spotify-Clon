@@ -8,6 +8,7 @@ import { GenericSectionComponent } from './components/generic-section/generic-se
 import { PlayListHeaderComponent } from './components/play-list-header/play-list-header.component';
 import { PlayListBodyComponent } from './components/play-list-body/play-list-body.component';
 import { ImgBrokenDirective } from './directives/img-broken.directive';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -23,7 +24,8 @@ import { ImgBrokenDirective } from './directives/img-broken.directive';
     ImgBrokenDirective
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule
   ], 
   exports: [
     SideBarComponent,
