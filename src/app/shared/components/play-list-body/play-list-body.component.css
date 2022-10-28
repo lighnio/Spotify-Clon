@@ -21,6 +21,10 @@
   opacity: 0.7;
 }
 
+.sorter{
+  cursor: pointer;
+}
+
 .play-list-rows {
   width: 100%;
   list-style: none;
