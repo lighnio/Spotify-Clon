@@ -9,6 +9,7 @@ import { AuthService } from '@modules/auth/services/auth.service';
 })
 export class AuthPagesComponent implements OnInit {
   formLogin: FormGroup = new FormGroup({})
+  errorSession: boolean = false
 
   constructor(private authService: AuthService ) { }
 
@@ -30,6 +31,13 @@ export class AuthPagesComponent implements OnInit {
     const {email, password} = this.formLogin.value
 
     this.authService.sendCredentials(email, password)
+    .subscribe(success => {
+      console.log("Successfull Login");
+      
+    }, err => {
+      console.log('Problem login into account, is the email and password correct?')
+      this.errorSession = true
+    })
     
   }
 
