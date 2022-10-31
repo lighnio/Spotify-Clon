@@ -1,35 +1,52 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { TrackModel } from '@core/models/tracks.model';
-import { observable, Observable, of } from 'rxjs';
-import * as rawData from '../../../data/tracks.json';
+import { Observable, of } from 'rxjs';
+import { map, catchError, mergeMap, tap } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TrackService {
+  private readonly URL = environment.api
 
-  dataTrackTrending$: Observable<TrackModel[]> = of([])
-  dataTrackRandom$: Observable<TrackModel[]> = of([])
 
-  constructor() {
-    const {data}: any = (rawData as any).default
-    this.dataTrackTrending$ = of(data)
 
-    this.dataTrackRandom$ = new Observable((observer) => {
+  constructor(private http:HttpClient) {
 
-      const trackExample: TrackModel = {
-        _id: 9,
-        name: 'Leve',
-        album: "Cartel de Santa",
-        url: 'http://',
-        cover: 'https://www.whosampled.com/static/track_images_200/lr179341_20161118_23200534156.jpg'
-
-      }
-
-      setTimeout(() => {
-        observer.next([trackExample])
-      }, 3500)
-    })
   }
+
+  /**
+   * 
+   * @returns all songs
+   */
+
+  getAllTracks$(): Observable<any>{
+    return this.http.get(`${this.URL}/tracks`)
+    .pipe(
+      map(({ data }: any) => {
+        console.log(data);
+        
+        return data;
+      })
+    )
+  }
+
+  /**
+   * 
+   * @returns all random song
+   */
+  getAllRandom$(): Observable<any>{
+    return this.http.get(`${this.URL}/tracks`)
+    .pipe(
+      mergeMap( ({data }: any) => data),
+      catchError(err => {
+        alert('Something Happens in tracks service')
+        return of([])
+      }
+      )
+    )
+  }
+
 }
 

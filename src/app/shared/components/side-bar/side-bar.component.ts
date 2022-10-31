@@ -39,7 +39,7 @@ export class SideBarComponent implements OnInit {
       {
         name: 'Canciones que te gustan',
         icon: 'uil-heart-medical',
-        router: ['/', 'favorites  '],
+        router: ['/', 'favorites'],
       }
     ]
 
