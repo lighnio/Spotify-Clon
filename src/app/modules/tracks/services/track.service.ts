@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map, catchError, mergeMap, tap } from 'rxjs/operators';
@@ -22,7 +22,9 @@ export class TrackService {
    */
 
   getAllTracks$(): Observable<any>{
-    return this.http.get(`${this.URL}/tracks`)
+    return this.http.get(`${this.URL}/tracks`, {
+      headers: new HttpHeaders({authorization: 'Bearer TOKEN'})
+    })
     .pipe(
       map(({ data }: any) => {
         console.log(data);
