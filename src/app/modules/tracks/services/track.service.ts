@@ -44,6 +44,8 @@ export class TrackService {
       mergeMap( ({data }: any) => data),
       catchError(err => {
         alert('Something Happens in tracks service')
+        console.log(err);
+        
         return of([])
       }
       )
