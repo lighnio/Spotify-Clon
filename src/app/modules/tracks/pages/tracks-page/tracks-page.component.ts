@@ -34,10 +34,9 @@ export class TracksPageComponent implements OnInit, OnDestroy{
 
   loadRandomData(): void {
     this.trackService.getAllRandom$()
-    .subscribe(res => {
-      console.log("random: ", res);
-      
-      this.tracksRandom = [res];
+    .subscribe((res: TrackModel[]) => {
+      console.log("random: ", res);  
+      this.tracksRandom = res;
     })
   }
 
