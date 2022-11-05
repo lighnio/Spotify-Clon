@@ -16,7 +16,7 @@ export class SearchService {
     return this.http.get(`${this.URL}/tracks?src=${term}`)
     .pipe(
       map((rawData:any) => rawData.data)
-    )
+    ) 
   }
 
 }
